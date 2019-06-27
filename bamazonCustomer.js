@@ -1,4 +1,4 @@
-
+//
 var mysql = require("mysql");
 
 var inquirer = require("inquirer");
@@ -104,7 +104,7 @@ function printItem()
 {
 	connection.query("SELECT * FROM products", function(err, item) {
     if (err) throw err;
-    		
+
     		console.log("                                                                                    ");
     		console.log("item_id   product_name                     department_name   price   stock_quantitiy" );
     		console.log("_______   ______________________________   _______________   _____   _______________" );
@@ -115,7 +115,8 @@ function printItem()
 
     	})
 
-
 }
+
+
 
 
