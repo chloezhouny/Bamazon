@@ -3,6 +3,10 @@ var mysql = require("mysql");
 
 var inquirer = require("inquirer");
 
+var Table = require('cli-table2');
+
+
+
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -93,6 +97,7 @@ function updateItem(id, newQuantity, units, product) {
       console.log(res.affectedRows + " items updated!\n");
       console.log("Successfully purchsed " + units + " " + product + " ." );
       printItem();
+      start();
     }
   );
 
@@ -103,17 +108,22 @@ function updateItem(id, newQuantity, units, product) {
 function printItem()
 {
 	connection.query("SELECT * FROM products", function(err, item) {
-    if (err) throw err;
+      if (err) throw err;
 
-    		console.log("                                                                                    ");
-    		console.log("item_id   product_name                     department_name   price   stock_quantitiy" );
-    		console.log("_______   ______________________________   _______________   _____   _______________" );
+      console.log(" ");
+      var table = new Table({
+        head: ['item_id', 'product_name', 'department_name', 'price', 'stock_quantity']
+      , colWidths: [20, 50]
+      });
+
     		for (var i = 0; i < item.length; i++)
-            {
-                console.log(item[i].item_id + "           " + item[i].product + "   " + item[i].department + "   " + item[i].price + + "   " + item[i].stock_quantity);
-            }
+        {
+            table.push([item[i].item_id, item[i].product, item[i].department, item[i].price, item[i].stock_quantity]);
+        }
 
-    	})
+        console.log(table.toString());
+
+    })
 
 }
 

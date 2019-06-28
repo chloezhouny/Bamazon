@@ -5,7 +5,7 @@ CREATE DATABASE bamazonDB;
 USE bamazonDB;
 
 CREATE TABLE products (
-  item_id INT NOT NULL,
+  item_id INT NOT NULL AUTO_INCREMENT,
   product VARCHAR(45) NULL,
   department VARCHAR(45) NULL,
   price DECIMAL(10,2) NULL,
@@ -13,17 +13,17 @@ CREATE TABLE products (
   PRIMARY KEY (item_id)
 );
 
-INSERT INTO products (item_id, product, department, price, stock_quantity)
-VALUES (1, "Uncharted 4", "Video Games", 49.95, 150),
-(2, "DOOM", "Video Games", 59.99, 200),
-(3, "Crate of Spam", "Food and Drink", 24.5, 50),
-(4, "Cool Shades", "Apparel", 75, 5),
-(5, "Worn Denim Jeans", "Apparel", 54.25, 35),
-(6, "Survival Towel", "Necessities", 42.42, 42),
-(7, "Bill and Ted's Excellent Adventure", "Films", 15, 25),
-(8, "Mad Max: Fury Road", "Films", 25.5, 57),
-(9, "Monopoly", "Board Games", 30.5, 35),
-(10, "Yahtzee", "Board Games", 19.95, 23);
+INSERT INTO products (product, department, price, stock_quantity)
+VALUES ("Uncharted 4", "Video Games", 49.95, 150),
+("DOOM", "Video Games", 59.99, 200),
+("Crate of Spam", "Food and Drink", 24.5, 50),
+("Cool Shades", "Apparel", 75, 5),
+("Worn Denim Jeans", "Apparel", 54.25, 35),
+("Survival Towel", "Necessities", 42.42, 42),
+("Bill and Ted's Excellent Adventure", "Films", 15, 25),
+("Mad Max: Fury Road", "Films", 25.5, 57),
+("Monopoly", "Board Games", 30.5, 35),
+("Yahtzee", "Board Games", 19.95, 23);
 
 
 
