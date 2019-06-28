@@ -86,7 +86,12 @@ function viewProductSales()
 
         for (var i = 0; i < item.length; i++)
         {
-            table.push([item[i].department_id, item[i].department, item[i].over_head_costs, item[i].product_sales, item[i].product_sales - item[i].over_head_costs]);
+            var product_sale = item[i].product_sales;
+            if (product_sale === null)
+            {
+               product_sale = 0;
+            }
+            table.push([item[i].department_id, item[i].department, item[i].over_head_costs, product_sale, product_sale - item[i].over_head_costs]);
         }
 
         console.log(table.toString());
@@ -96,11 +101,6 @@ function viewProductSales()
           start();
 
 }
-
-
-
-
-
 
 
 
