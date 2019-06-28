@@ -36,18 +36,40 @@ function start()
 
           {
             name: "id",
-            message: "What is the ID of the item you would like to purchase?",   
+            message: "What is the ID of the item you would like to purchase? (q to exit)",   
           },
+
+           ]).then(function(answer) {
+
+          if (answer.id === "q")
           {
-            name: "units",
-            message: "How many would you like?"
-          },
+                  process.exit(1);
+          }
+          else
+          {
+                  inquirer.prompt([
 
-        ]).then(function(answer) {
+                {
+                  name: "units",
+                  message: "How many would you like? (q to exit)"
+                },
 
-          checkStock(parseInt(answer.id), parseInt(answer.units));
+              ]).then(function(answer) {
 
-        })
+                if (answer.units === "q")
+                {
+                  process.exit(1);
+                }
+
+                checkStock(parseInt(answer.id), parseInt(answer.units));
+
+              })
+          }
+        
+        });
+
+  
+
     },100)
 }
 
@@ -64,7 +86,9 @@ function checkStock(id, units)
 
       if (item[0].stock_quantity < units)
       {
+        console.log(" ");
         console.log("Insufficient quantity!");
+        console.log(" ");
       }
       else
       {
@@ -101,13 +125,14 @@ function updateItem(id, newQuantity, units, product, price, productSales) {
 
     function(err, res) {
       if (err) throw err;
+      console.log(" ");
       console.log("Successfully purchased " + units + " " + product + " ." );
       printItem();
+
       start();
     }
   );
 
-  console.log(query.sql);
 }
 
 
@@ -132,7 +157,11 @@ function printItem()
             table.push([item[i].item_id, item[i].product, item[i].department, item[i].price, item[i].stock_quantity, item[i].product_sales]);
         }
 
+        console.log(" ");
+        console.log(" ");
         console.log(table.toString());
+        console.log(" ");
+        console.log(" ");
 
     })
 

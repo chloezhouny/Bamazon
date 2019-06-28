@@ -64,6 +64,8 @@ function start()
 
 		  if (answer.message === "exit")
 		  {
+		  	console.log(" ");
+		  	console.log("   Goodbye.")
 		    process.exit(1);
 		  }
 
@@ -92,7 +94,13 @@ function viewProduct()
             table.push([item[i].item_id, item[i].product, item[i].department, item[i].price, item[i].stock_quantity]);
         }
 
+        
+
+        console.log(" ");
+        console.log(" ");
         console.log(table.toString());
+        console.log(" ");
+        console.log(" ");
 
     })
      start();
@@ -122,7 +130,11 @@ function viewLowInventory()
             table.push([item[i].item_id, item[i].product, item[i].department, item[i].price, item[i].stock_quantity]);
         }
 
+        console.log(" ");
+        console.log(" ");
         console.log(table.toString());
+        console.log(" ");
+        console.log(" ");
 
     })
       start();
@@ -215,7 +227,10 @@ function updateProduct(name, quantity)
 
 	    function(err, res) {
 	      if (err) throw err;
+	      console.log(" ");
 	      console.log("Successfully added " + quantity + " " + name + " ." );
+	      console.log(" ");
+	      console.log(" ");
 	      start();
 	    }
 	 );
@@ -241,7 +256,7 @@ function updateProduct(name, quantity)
 	      if (err) throw err;
 	    }
   );
-
+  console.log(" ");
+  console.log(" ");
   start();
-  console.log(query.sql);
 }

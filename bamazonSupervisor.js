@@ -58,6 +58,7 @@ function start()
 
       if (answer.message === "exit")
       {
+        console.log(" ");
         console.log("Goodbye.")
         process.exit(1);
       }
@@ -79,12 +80,12 @@ function viewProductSales()
     connection.query(query, function(err, item) {
     if (err) throw err;
 
-    console.log(item);
 
     var table = new Table({
         head: ['department_id', 'department_name', 'over_head_costs', 'product_sales', 'total_profit']
       , colWidths: [20, 40]
       });
+
 
         for (var i = 0; i < item.length; i++)
         {
@@ -96,7 +97,11 @@ function viewProductSales()
             table.push([item[i].department_id, item[i].department, item[i].over_head_costs, product_sale, product_sale - item[i].over_head_costs]);
         }
 
+        console.log(" ");
+        console.log(" ");
         console.log(table.toString());
+        console.log(" ");
+        console.log(" ");
          start();
 
           });
@@ -145,9 +150,7 @@ function updateDepartment(name, cost)
      
     );
 
-    viewProductSales();
-    
-    console.log(query.sql);
+    viewProductSales();  
 }
 
 
