@@ -26,6 +26,8 @@ connection.connect(function(err) {
   start();
 });
 
+
+
 function start()
 {
 
@@ -61,6 +63,39 @@ function start()
     })
 
   },100)
+}
+
+
+
+
+function viewProductSales()
+{
+  
+
+          var query = "SELECT products.department, SUM(products.product_sales) AS product_sales, MAX(over_head_costs) AS over_head_costs, MAX(department_id) AS department_id ";
+            query += "FROM products RIGHT JOIN departments ON (products.department = departments.department_name) GROUP BY products.department";
+            connection.query(query, function(err, item) {
+            if (err) throw err;
+
+
+    var table = new Table({
+        head: ['department_id', 'department_name', 'over_head_costs', 'product_sales', 'total_profit']
+      , colWidths: [20, 40]
+      });
+
+        for (var i = 0; i < item.length; i++)
+        {
+            table.push([item[i].department_id, item[i].department, item[i].over_head_costs, item[i].product_sales, item[i].product_sales - item[i].over_head_costs]);
+        }
+
+        console.log(table.toString());
+
+
+
+          });
+
+          start();
+
 }
 
 

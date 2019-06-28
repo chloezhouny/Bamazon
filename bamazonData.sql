@@ -35,6 +35,15 @@ CREATE TABLE departments (
   PRIMARY KEY (department_id)
 );
 
+INSERT INTO departments (department_name, over_head_costs)
+VALUES ("Video Games", 200),
+("Food and Drink", 100),
+("Apparel", 50),
+("Necessities", 300),
+("Films", 35),
+("Board Games", 0),
+
+
 
 
 
