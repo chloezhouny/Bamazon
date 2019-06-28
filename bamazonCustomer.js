@@ -10,13 +10,10 @@ var Table = require('cli-table2');
 var connection = mysql.createConnection({
   host: "localhost",
 
-  // Your port; if not 3306
   port: 3306,
 
-  // Your username
   user: "root",
 
-  // Your password
   password: "password",
   database: "bamazonDB"
 });
@@ -32,8 +29,6 @@ connection.connect(function(err) {
 
 function start()
 {
-
-  
 
   setTimeout(function(){
 
@@ -57,8 +52,11 @@ function start()
 }
 
 
+
+
 function checkStock(id, units)
 {
+
 
   connection.query("SELECT * FROM products WHERE ?",{item_id: id}, function(err, item) {
     if (err) throw err;
@@ -71,7 +69,6 @@ function checkStock(id, units)
       else
       {
 
-
         updateItem(id, item[0].stock_quantity - units, units, item[0].product, item[0].price, item[0].product_sales);
       }
 
@@ -80,8 +77,11 @@ function checkStock(id, units)
 }
 
 
+
+
+
 function updateItem(id, newQuantity, units, product, price, productSales) {
-  console.log("Updating ...\n");
+
 
   var sales = productSales + price * units;
 
@@ -93,22 +93,25 @@ function updateItem(id, newQuantity, units, product, price, productSales) {
         product_sales: sales
 
       },
+
       {
         item_id: id
-      }
+      }     
     ],
+
     function(err, res) {
       if (err) throw err;
-      console.log(res.affectedRows + " items updated!\n");
       console.log("Successfully purchased " + units + " " + product + " ." );
       printItem();
       start();
     }
   );
 
-  // logs the actual query being run
   console.log(query.sql);
 }
+
+
+
 
 
 

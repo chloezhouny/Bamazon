@@ -8,13 +8,10 @@ var Table = require('cli-table2');
 var connection = mysql.createConnection({
   host: "localhost",
 
-  // Your port; if not 3306
   port: 3306,
 
-  // Your username
   user: "root",
 
-  // Your password
   password: "password",
   database: "bamazonDB"
 });
@@ -72,10 +69,10 @@ function viewProductSales()
 {
   
 
-          var query = "SELECT ANY_VALUE(departments.department_name) AS department, SUM(products.product_sales) AS product_sales, MAX(over_head_costs) AS over_head_costs, MAX(department_id) AS department_id ";
-            query += "FROM products RIGHT JOIN departments ON (products.department = departments.department_name) GROUP BY products.department";
-            connection.query(query, function(err, item) {
-            if (err) throw err;
+  var query = "SELECT ANY_VALUE(departments.department_name) AS department, SUM(products.product_sales) AS product_sales, MAX(over_head_costs) AS over_head_costs, MAX(department_id) AS department_id ";
+    query += "FROM products RIGHT JOIN departments ON (products.department = departments.department_name) GROUP BY products.department";
+    connection.query(query, function(err, item) {
+    if (err) throw err;
 
     console.log(item);
 
@@ -138,16 +135,13 @@ function updateDepartment(name, cost)
 
       function(err, res) {
         if (err) throw err;
-        console.log(res.affectedRows + " new product inserted!\n");
-
       }
      
     );
+
     viewProductSales();
     start();
-    // logs the actual query being run
     console.log(query.sql);
-
 }
 
 

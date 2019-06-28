@@ -9,13 +9,10 @@ var Table = require('cli-table2');
 var connection = mysql.createConnection({
   host: "localhost",
 
-  // Your port; if not 3306
   port: 3306,
 
-  // Your username
   user: "root",
 
-  // Your password
   password: "password",
   database: "bamazonDB"
 });
@@ -75,6 +72,9 @@ function start()
 	},100)
 }
 
+
+
+
 function viewProduct()
 {
 
@@ -130,6 +130,9 @@ function viewLowInventory()
 }
 
 
+
+
+
 function addInventory()
 {
 
@@ -159,86 +162,86 @@ function addProduct()
 {
 	inquirer.prompt([
 
-				  {
-				    name: "name",
-				    message: "What is the name of the product you would like to add?",   
-				  },
-				  {
-				  	type: 'list',
-				    name: "department",
-				    message: "Which department does this product fall into?",
-				    choices: ["Videos Games", "Food and Drink", "Apparel", "Necessities", "Films", "Board Games"]
-				  },
+		  {
+		    name: "name",
+		    message: "What is the name of the product you would like to add?",   
+		  },
 
-				  {
-				    name: "cost",
-				    message: "How much does it cost?"
-				  },
-				  {
-				    name: "quantity",
-				    message: "How many do we have?"
-				  },
+		  {
+		  	type: 'list',
+		    name: "department",
+		    message: "Which department does this product fall into?",
+		    choices: ["Videos Games", "Food and Drink", "Apparel", "Necessities", "Films", "Board Games"]
+		  },
 
-			  ]).then(function(answer) {
+		  {
+		    name: "cost",
+		    message: "How much does it cost?"
+		  },
 
-			  	createProduct(answer.name, answer.department, parseInt(answer.cost), parseInt(answer.quantity));
+		  {
+		    name: "quantity",
+		    message: "How many do we have?"
+		  },
 
-			  })
+	  ]).then(function(answer) {
+
+	  	createProduct(answer.name, answer.department, parseInt(answer.cost), parseInt(answer.quantity));
+
+	})
 }
 
 
 
 
 
-function updateProduct(name, quantity) {
+function updateProduct(name, quantity) 
 
-  console.log("Updating ...\n");
+{
   connection.query("SELECT stock_quantity FROM products WHERE ?", {product: name}, function(err, item) {
   		var stock = item[0].stock_quantity + quantity;
 
-		  var query = connection.query(
-		    "UPDATE products SET ? WHERE ?",
-		    [
-		      {
-		        stock_quantity: stock
-		      },
-		      {
-		        product: name
-		      }
-		    ],
-		    function(err, res) {
-		      if (err) throw err;
-		      console.log(res.affectedRows + " items updated!\n");
-		      console.log("Successfully purchsed " + quantity + " " + name + " ." );
-		      start();
-		    }
-		 );
+	  var query = connection.query(
+	    "UPDATE products SET ? WHERE ?",
+	    [
+	      {
+	        stock_quantity: stock
+	      },
+
+	      {
+	        product: name
+	      }
+	    ],
+
+	    function(err, res) {
+	      if (err) throw err;
+	      console.log("Successfully added " + quantity + " " + name + " ." );
+	      start();
+	    }
+	 );
      })
   };
 
 
 
 
-  function createProduct(name, department, cost, quantity) {
-  console.log("Inserting a new product...\n");
-  var query = connection.query(
-    "INSERT INTO products SET ?",
-    {
-      product: name,
-      department: department,
-      price: cost,
-      stock_quantity: quantity 
-    },
+  function createProduct(name, department, cost, quantity) 
+ {
 
-    function(err, res) {
-      if (err) throw err;
-      console.log(res.affectedRows + " new product inserted!\n");
+	var query = connection.query(
+	    "INSERT INTO products SET ?",
+	    {
+	      product: name,
+	      department: department,
+	      price: cost,
+	      stock_quantity: quantity 
+	    },
 
-    }
-
-    
+	    function(err, res) {
+	      if (err) throw err;
+	    }
   );
+
   start();
-  // logs the actual query being run
   console.log(query.sql);
 }
