@@ -72,11 +72,12 @@ function viewProductSales()
 {
   
 
-          var query = "SELECT products.department, SUM(products.product_sales) AS product_sales, MAX(over_head_costs) AS over_head_costs, MAX(department_id) AS department_id ";
+          var query = "SELECT ANY_VALUE(departments.department_name) AS department, SUM(products.product_sales) AS product_sales, MAX(over_head_costs) AS over_head_costs, MAX(department_id) AS department_id ";
             query += "FROM products RIGHT JOIN departments ON (products.department = departments.department_name) GROUP BY products.department";
             connection.query(query, function(err, item) {
             if (err) throw err;
 
+    console.log(item);
 
     var table = new Table({
         head: ['department_id', 'department_name', 'over_head_costs', 'product_sales', 'total_profit']
@@ -90,11 +91,63 @@ function viewProductSales()
 
         console.log(table.toString());
 
-
-
           });
 
           start();
+
+}
+
+
+
+
+
+
+
+
+
+function createDepartment()
+{
+
+  inquirer.prompt([
+
+            {
+              name: "name",
+              message: "What is the name of the department?",   
+            },
+
+            {
+              name: "overheadCost",
+              message: "What is the overhead cost of the department"
+            },
+
+          ]).then(function(answer) {
+
+            updateDepartment(answer.name, parseInt(answer.overheadCost));
+
+          })
+
+}
+
+function updateDepartment(name, cost)
+{
+    var query = connection.query(
+      "INSERT INTO departments SET ?",
+      {
+        department_name: name,
+        over_head_costs: cost,
+      },
+
+      function(err, res) {
+        if (err) throw err;
+        console.log(res.affectedRows + " new product inserted!\n");
+
+      }
+     
+    );
+    viewProductSales();
+    start();
+    // logs the actual query being run
+    console.log(query.sql);
 
 }
 
