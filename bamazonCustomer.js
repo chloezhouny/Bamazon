@@ -25,7 +25,7 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
-
+  printItem();
   start();
 });
 
@@ -34,7 +34,7 @@ connection.connect(function(err) {
 function start()
 {
 
-	printItem();
+	
 
 	setTimeout(function(){
 
