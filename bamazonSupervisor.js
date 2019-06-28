@@ -45,17 +45,20 @@ function start()
       if (answer.message === "View Product Sales by Department")
       {
          viewProductSales();
+
          
       }
 
       if (answer.message === "Create New Department")
       {
          createDepartment();
+        
          
       }
 
       if (answer.message === "exit")
       {
+        console.log("Goodbye.")
         process.exit(1);
       }
 
@@ -94,8 +97,10 @@ function viewProductSales()
         }
 
         console.log(table.toString());
+         start();
 
           });
+
         
 }
 
