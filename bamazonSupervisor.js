@@ -99,7 +99,6 @@ function viewProductSales()
           });
 
           start();
-
 }
 
 
