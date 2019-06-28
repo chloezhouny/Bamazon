@@ -41,7 +41,7 @@ VALUES ("Video Games", 200),
 ("Apparel", 50),
 ("Necessities", 300),
 ("Films", 35),
-("Board Games", 0),
+("Board Games", 0);
 
 
 

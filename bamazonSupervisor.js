@@ -45,11 +45,13 @@ function start()
       if (answer.message === "View Product Sales by Department")
       {
          viewProductSales();
+         
       }
 
       if (answer.message === "Create New Department")
       {
          createDepartment();
+         
       }
 
       if (answer.message === "exit")
@@ -59,7 +61,7 @@ function start()
 
     })
 
-  },100)
+  },200)
 }
 
 
@@ -70,7 +72,7 @@ function viewProductSales()
   
 
   var query = "SELECT ANY_VALUE(departments.department_name) AS department, SUM(products.product_sales) AS product_sales, MAX(over_head_costs) AS over_head_costs, MAX(department_id) AS department_id ";
-    query += "FROM products RIGHT JOIN departments ON (products.department = departments.department_name) GROUP BY products.department";
+    query += "FROM products RIGHT JOIN departments ON (products.department = departments.department_name) GROUP BY departments.department_name";
     connection.query(query, function(err, item) {
     if (err) throw err;
 
@@ -94,8 +96,7 @@ function viewProductSales()
         console.log(table.toString());
 
           });
-
-          start();
+        
 }
 
 
@@ -104,23 +105,24 @@ function viewProductSales()
 function createDepartment()
 {
 
-  inquirer.prompt([
+    inquirer.prompt([
 
-            {
-              name: "name",
-              message: "What is the name of the department?",   
-            },
+              {
+                name: "name",
+                message: "What is the name of the department?",   
+              },
 
-            {
-              name: "overheadCost",
-              message: "What is the overhead cost of the department"
-            },
+              {
+                name: "overheadCost",
+                message: "What is the overhead cost of the department"
+              },
 
-          ]).then(function(answer) {
+            ]).then(function(answer) {
 
-            updateDepartment(answer.name, parseInt(answer.overheadCost));
+              updateDepartment(answer.name, parseInt(answer.overheadCost));
 
-          })
+            })
+
 
 }
 
@@ -140,7 +142,7 @@ function updateDepartment(name, cost)
     );
 
     viewProductSales();
-    start();
+    
     console.log(query.sql);
 }
 
