@@ -38,11 +38,13 @@ $ node bamazonSupervisor.js
 
 #### Code Snippet
 How I use MYSQL GROUP BY, JOINS and aliases to generate a summerized table in terminal:
-```JAVASCRIPT
+```SQL
 
-  var query = "SELECT departments.department_name AS department, SUM(products.product_sales) AS product_sales, ANY_VALUE(over_head_costs) AS over_head_costs, ANY_VALUE(department_id) AS department_id ";
-
-  query += "FROM products RIGHT JOIN departments ON (products.department = departments.department_name) GROUP BY departments.department_name";
+ SELECT departments.department_name AS department, SUM(products.product_sales) AS product_sales, 
+ ANY_VALUE(over_head_costs) AS over_head_costs, ANY_VALUE(department_id) AS department_id
+  
+ FROM products RIGHT JOIN departments ON (products.department = departments.department_name) 
+ GROUP BY departments.department_name
 
 ```
 

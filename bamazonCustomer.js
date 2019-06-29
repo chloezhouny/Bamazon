@@ -54,22 +54,20 @@ function start()
                   message: "How many would you like? (q to exit)"
                 },
 
-              ]).then(function(answer) {
+              ]).then(function(answer2) {
 
-                if (answer.units === "q")
+                if (answer2.units === "q")
                 {
                   process.exit(1);
                 }
 
-                checkStock(parseInt(answer.id), parseInt(answer.units));
+                checkStock(parseInt(answer.id), parseInt(answer2.units));
 
               })
           }
         
         });
-
   
-
     },100)
 }
 
@@ -80,8 +78,9 @@ function checkStock(id, units)
 {
 
 
-  connection.query("SELECT * FROM products WHERE ?",{item_id: id}, function(err, item) {
+  connection.query("SELECT * FROM products WHERE ?", {item_id: id}, function(err, item) {
     if (err) throw err;
+    console.log(item);
 
 
       if (item[0].stock_quantity < units)
@@ -149,7 +148,10 @@ function printItem()
       console.log(" ");
       var table = new Table({
         head: ['item_id', 'product_name', 'department_name', 'price', 'stock_quantity', 'product_sales']
-      , colWidths: [20, 40]
+      , colWidths: [20, 40],
+      style: {
+        head: ["green"]
+      }
       });
 
         for (var i = 0; i < item.length; i++)

@@ -66,6 +66,7 @@ function start()
 		  {
 		  	console.log(" ");
 		  	console.log("   Goodbye.")
+		  	console.log(" ");
 		    process.exit(1);
 		  }
 
@@ -85,13 +86,16 @@ function viewProduct()
 
       console.log(" ");
       var table = new Table({
-        head: ['item_id', 'product_name', 'department_name', 'price', 'stock_quantity']
-      , colWidths: [20, 50]
+        head: ['item_id', 'product_name', 'department_name', 'price', 'stock_quantity', 'product_sales']
+      , colWidths: [20, 50],
+      style: {
+        head: ["magenta"]
+      }
       });
 
     		for (var i = 0; i < item.length; i++)
         {
-            table.push([item[i].item_id, item[i].product, item[i].department, item[i].price, item[i].stock_quantity]);
+            table.push([item[i].item_id, item[i].product, item[i].department, item[i].price, item[i].stock_quantity, item[i].product_sales]);
         }
 
         
@@ -121,13 +125,16 @@ function viewLowInventory()
 
       console.log(" ");
       var table = new Table({
-        head: ['item_id', 'product_name', 'department_name', 'price', 'stock_quantity']
-      , colWidths: [20, 50]
+        head: ['item_id', 'product_name', 'department_name', 'price', 'stock_quantity', 'product_sales']
+      , colWidths: [20, 50],
+      style: {
+        head: ["magenta"]
+      }
       });
 
     		for (var i = 0; i < item.length; i++)
         {
-            table.push([item[i].item_id, item[i].product, item[i].department, item[i].price, item[i].stock_quantity]);
+            table.push([item[i].item_id, item[i].product, item[i].department, item[i].price, item[i].stock_quantity, item[i].product_sales]);
         }
 
         console.log(" ");
@@ -172,35 +179,47 @@ function addInventory()
 
 function addProduct()
 {
-	inquirer.prompt([
+	connection.query("SELECT department_name FROM departments", function(err, item) {
 
-		  {
-		    name: "name",
-		    message: "What is the name of the product you would like to add?",   
-		  },
+		var choices = [];
+		for (var i = 0; i < item.length; i++)
+		{
+			choices.push(item[i].department_name);
+		}
 
-		  {
-		  	type: 'list',
-		    name: "department",
-		    message: "Which department does this product fall into?",
-		    choices: ["Videos Games", "Food and Drink", "Apparel", "Necessities", "Films", "Board Games"]
-		  },
+		inquirer.prompt([
 
-		  {
-		    name: "cost",
-		    message: "How much does it cost?"
-		  },
+			  {
+			    name: "name",
+			    message: "What is the name of the product you would like to add?",   
+			  },
 
-		  {
-		    name: "quantity",
-		    message: "How many do we have?"
-		  },
+			  {
+			  	type: 'list',
+			    name: "department",
+			    message: "Which department does this product fall into?",
+			    choices: choices
+			  },
 
-	  ]).then(function(answer) {
+			  {
+			    name: "cost",
+			    message: "How much does it cost?"
+			  },
 
-	  	createProduct(answer.name, answer.department, parseInt(answer.cost), parseInt(answer.quantity));
+			  {
+			    name: "quantity",
+			    message: "How many do we have?"
+			  },
+
+		  ]).then(function(answer) {
+
+		  	createProduct(answer.name, answer.department, parseInt(answer.cost), parseInt(answer.quantity));
+
+		})
 
 	})
+
+
 }
 
 

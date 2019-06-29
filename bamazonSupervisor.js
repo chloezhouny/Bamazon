@@ -4,6 +4,9 @@ var inquirer = require("inquirer");
 
 var Table = require('cli-table2');
 
+const chalk = require('chalk');
+
+
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -59,7 +62,8 @@ function start()
       if (answer.message === "exit")
       {
         console.log(" ");
-        console.log("Goodbye.")
+        console.log("   Goodbye.")
+        console.log(" ");
         process.exit(1);
       }
 
@@ -83,7 +87,10 @@ function viewProductSales()
 
     var table = new Table({
         head: ['department_id', 'department_name', 'over_head_costs', 'product_sales', 'total_profit']
-      , colWidths: [20, 40]
+      , colWidths: [20, 40],
+      style: {
+        head: ["yellow"]
+      }
       });
 
 
