@@ -15,30 +15,32 @@ $ npm install cli-table2
 ```
 
 <br>
+<br>
+
 
 ## Usage Demo
-Customer View
-```
-$ node bamazonCustomer.js
-```
+* Customer View
+    ```
+    $ node bamazonCustomer.js
+    ```
 
-![](customer.gif)
-
-<br>
-
-Manager View
-```
-$ node bamazonManager.js
-```
-![](Manager.gif)
+    ![](customer.gif)
 
 <br>
 
-Supervisor View
-```
-$ node bamazonSupervisor.js
-```
-![](Supervisor.gif)
+* Manager View
+    ```
+    $ node bamazonManager.js
+    ```
+    ![](Manager.gif)
+
+<br>
+
+* Supervisor View
+    ```
+    $ node bamazonSupervisor.js
+    ```
+    ![](Supervisor.gif)
 
 <br>
 <br>
