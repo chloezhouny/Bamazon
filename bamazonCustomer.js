@@ -80,7 +80,6 @@ function checkStock(id, units)
 
   connection.query("SELECT * FROM products WHERE ?", {item_id: id}, function(err, item) {
     if (err) throw err;
-    console.log(item);
 
 
       if (item[0].stock_quantity < units)

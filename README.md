@@ -4,13 +4,9 @@ This project creates a Amazon-like storefront with the MySQL skills. The app tak
 
 <br>
 
-#### Demo 
 
-![](demo.gif)
 
-<br>
-
-#### Installation
+## Installation
 ```
 $ npm i
 $ npm install inquirer
@@ -20,23 +16,37 @@ $ npm install cli-table2
 
 <br>
 
-#### Usage
+## Usage Demo
 Customer View
 ```
 $ node bamazonCustomer.js
 ```
+
+![](customer.gif)
+
+<br>
+
 Manager View
 ```
 $ node bamazonManager.js
 ```
+![](Manager.gif)
+
+<br>
 
 Supervisor View
 ```
 $ node bamazonSupervisor.js
 ```
+![](Supervisor.gif)
+
+<br>
+<br>
 <br>
 
-#### Code Snippet
+
+
+## Code Snippet
 How I use MYSQL GROUP BY, JOINS and aliases to generate a summerized table in terminal:
 ```SQL
 
@@ -49,8 +59,9 @@ How I use MYSQL GROUP BY, JOINS and aliases to generate a summerized table in te
 ```
 
 <br>
+<br>
 
-#### Technology Used
+## Technology Used
 
 
 * Command Line
@@ -61,5 +72,5 @@ How I use MYSQL GROUP BY, JOINS and aliases to generate a summerized table in te
 
 <br>
 
-#### Author
+## Author
 Chloe Zhou
