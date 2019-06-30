@@ -23,6 +23,10 @@ $ npm install cli-table2
     ```
     $ node bamazonCustomer.js
     ```
+    * View Inventory
+    * Buy
+    * Exit
+
 
     ![](customer.gif)
 
@@ -32,7 +36,14 @@ $ npm install cli-table2
     ```
     $ node bamazonManager.js
     ```
+    * View Products for Sale
+    * View Low Inventory
+    * Add to Inventory
+    * Add new Product
+    * Exit
+
     ![](Manager.gif)
+    
 
 <br>
 
@@ -40,6 +51,10 @@ $ npm install cli-table2
     ```
     $ node bamazonSupervisor.js
     ```
+    * View Products for Sale by Department
+    * Create New Department
+    * Exit
+
     ![](Supervisor.gif)
 
 <br>
